@@ -17,7 +17,7 @@ void mcp23s17_init(spi_inst_t* spi_inst, uint8_t pin) {
 	mcp23s17_write_byte(spi_inst, pin, MCP23s17_IOCON, iocon);
 }
 
-/// Read byte from device on [pin] from [reg], set result to [value]
+/// Read byte from device on [pin] from [_register], set result to [value]
 int mcp23s17_read_byte(spi_inst_t* spi_inst, uint8_t pin, uint8_t _register, uint8_t *value) {
 	uint8_t command[] = {0x41, _register};    // opcode, register
 	gpio_put(pin, false);                     // select chip, active low
@@ -27,6 +27,7 @@ int mcp23s17_read_byte(spi_inst_t* spi_inst, uint8_t pin, uint8_t _register, uin
 	return PICO_OK;
 }
 
+/// Write [value] to device on [pin] to [_register]
 int mcp23s17_write_byte(spi_inst_t* spi_inst, uint8_t pin, uint8_t _register, uint8_t value) {
 	uint8_t command[] = { 0x40, _register, value }; // opcode, register, value
 	gpio_put(pin, false);                           // select chip, active low
@@ -35,7 +36,7 @@ int mcp23s17_write_byte(spi_inst_t* spi_inst, uint8_t pin, uint8_t _register, ui
 	return PICO_OK;
 }
 
-/// Read two bytes from device on [pin]
+/// Read two bytes from device on [pin], set result to [value]
 int mcp23s17_read_word(spi_inst_t* spi_inst, uint8_t pin, uint8_t low_register, uint8_t high_register, uint16_t &value) {
 	uint8_t low_byte = 0;
 	uint8_t high_byte = 0;
