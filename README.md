@@ -3,7 +3,9 @@ Raspberry Pi Pico library to communicate with MCP23S17 16-bit I/O expander
 
 ## Limitations
 While this library is fairly barebones, it still provides the barebone code to communicate with the MCP23S17 chip.
-It's enough for my personal needs for another project, others are welcome to contribute with furthur revisions that could implement more advanced features such as interrupts.
+It's enough for my personal needs for another project, others are welcome to contribute with furthur revisions that could implement more advanced features such as 
+* interrupts
+* make a class for one instance of a chip, so passing SPI_PORT and pin is not neccessary
 
 ## Usage
 Add this repository as a submodule
