@@ -24,19 +24,19 @@
 #define MCP23S17_POLARITY_NORMAL 0x00
 #define MCP23S17_POLARITY_INVERTED 0xff
 
-// Initialize GPIO pins for chip select
+/// Initialize GPIO pins for chip select
 void mcp23s17_init_gpio(uint8_t pins[]);
 
+/// Init MCP23S17 chip by setting IOCON
 void mcp23s17_init(spi_inst_t* spi_inst, uint8_t pin);
 
-/// Read byte from device on [pin] from [reg], set result to [value]
+/// Read byte from device on [pin] from [_register], set result to [value]
 int mcp23s17_read_byte(spi_inst_t* spi_inst, uint8_t pin, uint8_t reg, uint8_t *value);
 
-/// Read two bytes from device on [pin]
+/// Read two bytes from device on [pin], set result to [value]
 int mcp23s17_read_word(spi_inst_t* spi_inst, uint8_t pin, uint8_t low_register, uint8_t high_register, uint16_t *value);
 
+/// Write [value] to device on [pin] to [_register]
 int mcp23s17_write_byte(spi_inst_t* spi_inst, uint8_t pin, uint8_t _register, uint8_t value);
-
-int mcp23s17_set_io_direction(spi_inst_t* spi_inst, uint8_t pin, uint8_t _register, uint8_t mask);
 
 #endif // PICO_MCP23S17_H
