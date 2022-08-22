@@ -12,6 +12,7 @@ void mcp23s17_init_gpio(uint8_t pins[]) {
 }
 
 // todo(mathias): implement polarity and mirroring
+/// Init MCP23S17 chip by setting IOCON
 void mcp23s17_init(spi_inst_t* spi_inst, uint8_t pin) {
 	uint8_t iocon = 0x00;
 	mcp23s17_write_byte(spi_inst, pin, MCP23s17_IOCON, iocon);
