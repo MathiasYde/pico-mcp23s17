@@ -1,5 +1,5 @@
 # pico-mcp23s17
-Raspberry Pi library to communicate with MCP23S17 16-bit I/O expander
+Raspberry Pi Pico library to communicate with MCP23S17 16-bit I/O expander
 
 ## Limitations
 While this library is fairly barebones, it still provides the barebone code to communicate with the MCP23S17 chip.
