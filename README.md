@@ -1,7 +1,23 @@
 # pico-mcp23s17
 Raspberry Pi library to communicate with MCP23S17 16-bit I/O expander
 
+## Limitations
+While this library is fairly barebones, it still provides the barebone code to communicate with the MCP23S17 chip.
+It's enough for my personal needs for another project, others are welcome to contribute with furthur revisions that could implement more advanced features such as interrupts.
+
 ## Usage
+Add this repository as a submodule
+```bash
+git submodule add https://github.com/MathiasYde/pico-mcp23s17
+```
+Include it in your project's CMakeLists.txt
+```CMakeLists.txt
+add_subdirectory(pico-mcp23s17)
+
+target_link_libraries( ... pico_mcp23s17)
+```
+
+Example code
 ```cpp
 #include "mcp23s17.h"
 
@@ -11,7 +27,7 @@ uint8_t PIN_SPI_MOSI = 19;
 uint8_t PIN_SPI_MISO = 16;
 
 int main() {
-  stdio_init_all();
+	stdio_init_all();
   	// init spi with max speed of the mcp23s17
 	spi_init(SPI_PORT, MCP23S17_MAX_SPEED);
 
@@ -31,9 +47,8 @@ int main() {
   	// configure register B for input
 	mcp23s17_write_byte(SPI_PORT, PIN_DATA_PORT, MCP23S17_IODIR_B, MCP23S17_IODIR_INPUT);
   
-  	// configure register B to enable pull ups and inverted polarity to reduce noise
+  	// configure register B to enable pull ups to reduce noise
 	mcp23s17_write_byte(SPI_PORT, PIN_DATA_PORT, MCP23S17_PULLUP_B, MCP23S17_PULLUP_ENABLE);
-	mcp23s17_write_byte(SPI_PORT, PIN_DATA_PORT, MCP23S17_POLARITY_B, MCP23S17_POLARITY_INVERTED);
 
 	while (true) {
    		 // write out 1 bit on register A, being shifted to the left 8 times
@@ -46,8 +61,11 @@ int main() {
    		 // read data from register B
    		 uint8_t in_data;
  		 mcp23s17_read_byte(SPI_PORT, PIN_DATA_PORT, MCP23S17_GPIO_B, &in_data);
-  		 printf("read %d\n", in_data); // these bits are inverted, so 255 is default
+  		 printf("read %d\n", in_data);
    		 sleep_ms(100);
 	}
 }
 ```
+
+## License
+See LICENSE file
