@@ -43,6 +43,6 @@ int mcp23s17_read_word(spi_inst_t* spi_inst, uint8_t pin, uint8_t low_register, 
 	uint8_t high_byte = 0;
 	mcp23s17_read_byte(spi_inst, pin, low_register, &low_byte);    // read low byte
 	mcp23s17_read_byte(spi_inst, pin, high_register, &high_byte);  // read high byte
-	value = (uint16_t*)((high_byte << 8) + low_byte);              //shift high byte 8 bits to the left
+	*value = (uint16_t)((high_byte << 8) | low_byte);              //shift high byte 8 bits to the left
 	return PICO_OK;
 }
